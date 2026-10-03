@@ -1,0 +1,75 @@
+{
+  "@@locale": "ar",
+  "hello": "مرحبا",
+  "@hello": {
+    "description": "رسالة ترحيبية تظهر للمستخدم"
+  },
+  "welcome": "أهلا وسهلا",
+  "@welcome": {
+    "description": "رسالة ترحيب عامة"
+  },
+  "login": "تسجيل الدخول",
+  "@login": {
+    "description": "نص زر تسجيل الدخول"
+  },
+  "beautyBeginsWithAFlower": "الجمال يبدأ بزهرة",
+  "@beautyBeginsWithAFlower": {
+    "description": "عنوان شاشة الترحيب الأولى"
+  },
+  "discoverBouquets": "اكتشف أجمل باقات الزهور والزهور الطازجة التي تجعل كل لحظة مميزة.",
+  "@discoverBouquets": {
+    "description": "وصف شاشة الترحيب الأولى"
+  },
+  "sameDayDelivery": "توصيل في نفس اليوم",
+  "@sameDayDelivery": {
+    "description": "عنوان شاشة الترحيب الثانية"
+  },
+  "sameDayDeliverySubtitle": "اطلب زهورك المفضلة واحصل عليها طازجة حتى باب منزلك في نفس اليوم.",
+  "@sameDayDeliverySubtitle": {
+    "description": "وصف شاشة الترحيب الثانية"
+  },
+  "emile": "البريد الإلكتروني",
+  "@emile": {
+    "description": "النص المستخدم كعنوان لحقل البريد الإلكتروني"
+  },
+  "password": "كلمة المرور",
+  "@password": {
+    "description": "النص المستخدم كعنوان لحقل كلمة المرور"
+  },
+  "forgot": "نسيت كلمة المرور؟",
+  "@forgot": {
+    "description": "النص الذي يظهر للمستخدم عند السؤال عن نسيان كلمة المرور"
+  },
+  "reset_password": "إعادة تعيين كلمة المرور",
+  "@reset_password": {
+    "description": "النص المستخدم لإجراء إعادة تعيين كلمة المرور"
+  },
+  "daccount": "ليس لديك حساب؟",
+  "@daccount": {
+    "description": "النص الذي يظهر للمستخدم عندما لا يملك حسابًا"
+  },
+  "registration": "إنشاء حساب",
+  "@registration": {
+    "description": "النص المستخدم لإجراء إنشاء حساب جديد"
+  },
+  "loginSuccess": "تم تسجيل الدخول بنجاح",
+  "@loginSuccess": {
+    "description": "رسالة النجاح التي تظهر بعد تسجيل الدخول بنجاح"
+  },
+  "next": "التالي",
+  "@next": {
+    "description": "النص الظاهر على زر الانتقال إلى صفحة التقديم التالية"
+  },
+  "skip": "تخطي",
+  "@skip": {
+    "description": "النص الظاهر على زر تخطي خطوات التقديم"
+  },
+  "name": "الاسم",
+  "@name": {
+    "description": "النص المستخدم كعنوان لحقل الاسم"
+  },
+  "confirmPassword": "تأكيد كلمة المرور",
+  "@confirmPassword": {
+    "description": "النص المستخدم كعنوان لحقل تأكيد كلمة المرور"
+  }
+}

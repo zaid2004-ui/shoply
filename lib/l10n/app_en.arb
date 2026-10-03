@@ -1,0 +1,75 @@
+{
+  "@@locale": "en",
+  "hello": "Hello",
+  "@hello": {
+    "description": "Welcome message shown to the user"
+  },
+  "welcome": "Welcome",
+  "@welcome": {
+    "description": "General greeting message"
+  },
+  "login": "Login",
+  "@login": {
+    "description": "Login button text"
+  },
+  "beautyBeginsWithAFlower": "Beauty Begins With a Flower",
+  "@beautyBeginsWithAFlower": {
+    "description": "Title for the first onboarding screen"
+  },
+  "discoverBouquets": "Discover beautiful bouquets and fresh flowers made to make every moment special.",
+  "@discoverBouquets": {
+    "description": "Description for the first onboarding screen"
+  },
+  "sameDayDelivery": "Same-Day Delivery",
+  "@sameDayDelivery": {
+    "description": "Title for the second onboarding screen"
+  },
+  "sameDayDeliverySubtitle": "Order your favorite flowers and get them delivered fresh to your door on the same day.",
+  "@sameDayDeliverySubtitle": {
+    "description": "Description for the second onboarding screen"
+  },
+  "emile": "Email",
+  "@emile": {
+    "description": "Label for the email input field"
+  },
+  "password": "Password",
+  "@password": {
+    "description": "Label for the password input field"
+  },
+  "forgot": "Forgot your password?",
+  "@forgot": {
+    "description": "Text asking the user if they forgot their password"
+  },
+  "reset_password": "Reset Password",
+  "@reset_password": {
+    "description": "Text used for the reset password action"
+  },
+  "daccount": "Don't have an account?",
+  "@daccount": {
+    "description": "Text displayed when the user does not have an account"
+  },
+  "registration": "Register",
+  "@registration": {
+    "description": "Text used for the registration action"
+  },
+  "loginSuccess": "Login successful",
+  "@loginSuccess": {
+    "description": "Success message displayed after a successful login"
+  },
+  "next": "Next",
+  "@next": {
+    "description": "Text displayed on the onboarding button to move to the next page"
+  },
+  "skip": "Skip",
+  "@skip": {
+    "description": "Text displayed on the onboarding button to skip the onboarding process"
+  },
+  "name": "Name",
+  "@name": {
+    "description": "Label for the name input field"
+  },
+  "confirm": "Confirm Password",
+  "@confirm": {
+    "description": "Label for the confirm password input field"
+  }
+}
