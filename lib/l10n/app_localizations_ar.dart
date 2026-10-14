@@ -62,5 +62,11 @@ class AppLocalizationsAr extends AppLocalizations {
   String get name => 'الاسم';
 
   @override
-  String get confirm => 'Confirm Password';
+  String get confirmPassword => 'تأكيد كلمة المرور';
+
+  @override
+  String get required_field => 'هذا الحقل مطلوب';
+
+  @override
+  String get invalid_email => 'يرجى إدخال بريد إلكتروني صحيح';
 }

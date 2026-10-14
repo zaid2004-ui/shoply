@@ -2,15 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shoply_app/core/routes/app_pages.dart';
 import 'package:shoply_app/core/routes/app_routes.dart';
+import 'package:shoply_app/core/utils/images/app_images.dart';
 import 'package:shoply_app/core/utils/widgets/custom_button.dart';
+import 'package:shoply_app/core/utils/widgets/custom_password_field.dart';
 import 'package:shoply_app/core/utils/widgets/custom_row_title_subtitle.dart';
 import 'package:shoply_app/core/utils/widgets/custom_text_field.dart';
 import 'package:shoply_app/l10n/app_localizations.dart';
 
-class ResetPasswordCard extends StatelessWidget {
-  const ResetPasswordCard({super.key, required this.emailControler});
+class LoginCard extends StatelessWidget {
+  const LoginCard({
+    super.key,
+    required this.emailControler,
+    required this.passwordController,
+  });
 
   final TextEditingController emailControler;
+  final TextEditingController passwordController;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +31,7 @@ class ResetPasswordCard extends StatelessWidget {
           constraints: const BoxConstraints(maxWidth: 500),
           child: Container(
             width: double.infinity,
-            padding: const EdgeInsets.fromLTRB(30, 35, 30, 30),
+            padding: const EdgeInsets.fromLTRB(30, 25, 30, 30),
             decoration: BoxDecoration(
               color: colorScheme.surface,
               borderRadius: BorderRadius.circular(28),
@@ -40,67 +47,90 @@ class ResetPasswordCard extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                // =========================
-                // Reset Password Title
-                // =========================
+                // Logo
+                Image.asset(
+                  AppImages.shoplySplashImage,
+                  width: 160,
+                  height: 160,
+                ),
+
+                const SizedBox(height: 5),
+
+                // Login title
                 Text(
-                  localizations.reset_password,
-                  textAlign: TextAlign.center,
+                  localizations.login,
                   style: GoogleFonts.greatVibes(
                     fontSize: 48,
                     color: colorScheme.primary,
                   ),
                 ),
 
-                const SizedBox(height: 25),
-
-                // =========================
-                // Description
-                // =========================
-                Text(
-                  localizations.forgot,
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.bodyMedium,
-                ),
-
                 const SizedBox(height: 30),
 
-                // =========================
                 // Email
-                // =========================
                 CustomTextField(
                   label: localizations.emile,
                   controller: emailControler,
+                  valedator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return AppLocalizations.of(context)!.required_field;
+                    }
+
+                    if (!RegExp(r'^.+\@.+\..+$').hasMatch(value)) {
+                      return AppLocalizations.of(context)!.invalid_email;
+                    }
+                    return null;
+                  },
+                  inputType: TextInputType.emailAddress,
+                ),
+
+                const SizedBox(height: 18),
+
+                // Password
+                CustomPasswordField(
+                  label: localizations.password,
+                  controller: passwordController,
+                  valedat: (value) {
+                    if (value == null || value.isEmpty) {
+                      AppLocalizations.of(context)!.required_field;
+                    }
+
+                    return null;
+                  },
+                ),
+
+                const SizedBox(height: 10),
+
+                // Forgot password
+                CustomRowTitleSubtitle(
+                  title: localizations.forgot,
+                  subtitle: localizations.reset_password,
+                  onTap: () {
+                    AppRoutes.pushNamed(AppPages.resetPassword);
+                  },
                 ),
 
                 const SizedBox(height: 25),
 
-                // =========================
-                // Reset Password Button
-                // =========================
+                // Login button
                 SizedBox(
                   width: double.infinity,
                   child: CustomButton(
-                    text: localizations.reset_password,
+                    text: localizations.login,
                     onPressed: () {
-                      // Handle reset password logic here
+                      AppRoutes.pushNamed(AppPages.home);
                     },
                   ),
                 ),
 
                 const SizedBox(height: 18),
 
-                // =========================
-                // Back To Login
-                // =========================
+                // Register
                 CustomRowTitleSubtitle(
                   title: localizations.daccount,
-                  subtitle: localizations.login,
+                  subtitle: localizations.registration,
                   onTap: () {
-                    AppRoutes.pushNamedAndRemoveUntil(
-                      AppPages.login,
-                      AppPages.login,
-                    );
+                    AppRoutes.pushNamed(AppPages.register);
                   },
                 ),
               ],

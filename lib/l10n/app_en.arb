@@ -68,8 +68,16 @@
   "@name": {
     "description": "Label for the name input field"
   },
-  "confirm": "Confirm Password",
-  "@confirm": {
+  "confirmPassword": "Confirm Password",
+  "@confirmPassword": {
     "description": "Label for the confirm password input field"
+  },
+  "required_field": "This field is required",
+  "@required_field": {
+    "description": "Error message displayed when a required text field is empty."
+  },
+  "invalid_email": "Please enter a valid email address",
+  "@invalid_email": {
+    "description": "Error message displayed when the email address format is invalid."
   }
 }

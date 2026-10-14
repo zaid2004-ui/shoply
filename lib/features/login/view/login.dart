@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shoply_app/features/login/widget/login_card.dart';
+import 'package:shoply_app/features/login/view/widget/login_card.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});

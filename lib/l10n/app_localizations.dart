@@ -204,7 +204,19 @@ abstract class AppLocalizations {
   ///
   /// In en, this message translates to:
   /// **'Confirm Password'**
-  String get confirm;
+  String get confirmPassword;
+
+  /// Error message displayed when a required text field is empty.
+  ///
+  /// In en, this message translates to:
+  /// **'This field is required'**
+  String get required_field;
+
+  /// Error message displayed when the email address format is invalid.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid email address'**
+  String get invalid_email;
 }
 
 class _AppLocalizationsDelegate

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shoply_app/features/resat_password.dart/widget/resat_password_card.dart';
+import 'package:shoply_app/features/resat_password.dart/view/widget/resat_password_card.dart';
 
 class ResetPassword extends StatefulWidget {
   const ResetPassword({super.key});

@@ -3,8 +3,16 @@ import 'package:flutter/material.dart';
 class CustomTextField extends StatelessWidget {
   final String label;
   final TextEditingController? controller;
+  final String? Function(String?)? valedator;
+  final TextInputType? inputType;
 
-  const CustomTextField({super.key, required this.label, this.controller});
+  const CustomTextField({
+    super.key,
+    required this.label,
+    this.controller,
+    this.valedator,
+    this.inputType,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -18,19 +26,7 @@ class CustomTextField extends StatelessWidget {
         ),
         labelText: label,
       ),
-      validator: (value) {
-        if (value == null || value.isEmpty) {
-          return null;
-          // return AppLocalizations.of(context)!.required_field;
-        }
-
-        if (!RegExp(r'^.+\@.+\..+$').hasMatch(value)) {
-          return null;
-          //  AppLocalizations.of(context)!.invalid_email;
-        }
-
-        return null;
-      },
+      validator: valedator,
     );
   }
 }

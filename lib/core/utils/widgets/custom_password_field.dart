@@ -3,8 +3,14 @@ import 'package:flutter/material.dart';
 class CustomPasswordField extends StatelessWidget {
   final String label;
   final TextEditingController? controller;
+  final String? Function(String?)? valedat;
 
-  const CustomPasswordField({super.key, required this.label, this.controller});
+  const CustomPasswordField({
+    super.key,
+    required this.label,
+    this.controller,
+    this.valedat,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -19,14 +25,7 @@ class CustomPasswordField extends StatelessWidget {
         ),
         labelText: label,
       ),
-      validator: (value) {
-        if (value == null || value.isEmpty) {
-          return null;
-          // AppLocalizations.of(context)!.required_field;
-        }
-
-        return null;
-      },
+      validator: valedat,
     );
   }
 }

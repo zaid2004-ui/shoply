@@ -71,5 +71,13 @@
   "confirmPassword": "تأكيد كلمة المرور",
   "@confirmPassword": {
     "description": "النص المستخدم كعنوان لحقل تأكيد كلمة المرور"
+  },
+  "required_field": "هذا الحقل مطلوب",
+  "@required_field": {
+    "description": "رسالة خطأ تظهر عندما يكون الحقل المطلوب فارغًا."
+  },
+  "invalid_email": "يرجى إدخال بريد إلكتروني صحيح",
+  "@invalid_email": {
+    "description": "رسالة خطأ تظهر عندما يكون تنسيق البريد الإلكتروني غير صحيح."
   }
 }

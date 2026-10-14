@@ -25,7 +25,11 @@ class CustomRowTitleSubtitle extends StatelessWidget {
           onTap: onTap,
           child: Text(
             subtitle,
-            style: const TextStyle(decoration: TextDecoration.underline),
+            style: Theme.of(context).textTheme.titleSmall!.copyWith(
+              decoration: TextDecoration.underline,
+              color: Theme.of(context).colorScheme.primary,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
       ],

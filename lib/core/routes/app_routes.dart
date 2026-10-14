@@ -4,8 +4,8 @@ import 'package:shoply_app/features/home/view/detals_product.dart';
 import 'package:shoply_app/features/home/view/home.dart';
 import 'package:shoply_app/features/login/view/login.dart';
 import 'package:shoply_app/features/onboarding/view/on_boarding_screen.dart';
-import 'package:shoply_app/features/regester/view/regester.dart';
-import 'package:shoply_app/features/resat_password.dart/view/resit_password.dart';
+import 'package:shoply_app/features/signup/view/signup_screen.dart';
+import 'package:shoply_app/features/resat_password.dart/view/resit_password_screen.dart';
 import 'package:shoply_app/features/splash/view/splash_screen.dart';
 
 class AppRoutes {
@@ -42,7 +42,7 @@ class AppRoutes {
       case AppPages.register:
         return MaterialPageRoute(
           builder: (context) {
-            return const Register();
+            return const SignupScreen();
           },
         );
       case AppPages.home:

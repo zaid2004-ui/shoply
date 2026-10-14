@@ -62,5 +62,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get name => 'Name';
 
   @override
-  String get confirm => 'Confirm Password';
+  String get confirmPassword => 'Confirm Password';
+
+  @override
+  String get required_field => 'This field is required';
+
+  @override
+  String get invalid_email => 'Please enter a valid email address';
 }

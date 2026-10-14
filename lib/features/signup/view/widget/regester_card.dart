@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shoply_app/core/regex/app_regex.dart';
 import 'package:shoply_app/core/utils/widgets/custom_button.dart';
 import 'package:shoply_app/core/utils/widgets/custom_password_field.dart';
 import 'package:shoply_app/core/utils/widgets/custom_row_title_subtitle.dart';
 import 'package:shoply_app/core/utils/widgets/custom_text_field.dart';
+import 'package:shoply_app/core/utils/widgets/cutom_text_filed_phon.dart';
 import 'package:shoply_app/l10n/app_localizations.dart';
 
 class RegisterCard extends StatelessWidget {
@@ -67,17 +69,41 @@ class RegisterCard extends StatelessWidget {
                 ),
 
                 const SizedBox(height: 30),
+                //name
 
                 CustomTextField(
                   label: localizations.name,
                   controller: nameController,
+                  valedator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return AppLocalizations.of(context)!.required_field;
+                    }
+
+                    return null;
+                  },
                 ),
 
                 const SizedBox(height: 15),
 
+                CutomTextFiledPhon(phoneCotroler: phoneController),
+
+                const SizedBox(height: 15),
+
+                //emile
                 CustomTextField(
                   label: localizations.emile,
                   controller: emailController,
+                  valedator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return AppLocalizations.of(context)!.required_field;
+                    }
+
+                    if (!AppRegex.email.hasMatch(value)) {
+                      return AppLocalizations.of(context)!.invalid_email;
+                    }
+                    return null;
+                  },
+                  inputType: TextInputType.emailAddress,
                 ),
 
                 const SizedBox(height: 15),
@@ -90,13 +116,19 @@ class RegisterCard extends StatelessWidget {
                 CustomPasswordField(
                   label: localizations.password,
                   controller: passwordController,
+                  valedat: (v) => AppRegex.password.hasMatch(v ?? '')
+                      ? null
+                      : 'Min 6 chars, one uppercase and one symbol (!@#\$&*)',
                 ),
 
                 const SizedBox(height: 15),
 
                 CustomPasswordField(
-                  label: localizations.confirm,
-                  controller: confirmPasswordController,
+                  label: localizations.confirmPassword,
+                  controller: passwordController,
+                  valedat: (v) => v == passwordController.text
+                      ? null
+                      : 'Passwords do not match',
                 ),
 
                 const SizedBox(height: 25),
