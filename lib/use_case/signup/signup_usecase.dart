@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shoply_app/core/helper/error_handle_helper.dart';
+import 'package:shoply_app/core/service/upload_image_service.dart';
 import 'package:shoply_app/core/utils/constants/firestore_collections.dart';
 import 'package:shoply_app/model/signup/request_signup.dart';
 
@@ -10,14 +13,16 @@ class SignupUsecase {
   // Registers a new user and returns either an error message or success
   Future<Either<String, bool>> signup({
     required String password, // User's password
-    required RequestSignup requestSignup, // User's registration data
+    required RequestSignup requestSignup,
+    required File? image,
+    // User's registration data
   }) async {
     // Try to execute the registration process
     try {
       // Create a new account using email and password
       final userCredential = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(
-            email: requestSignup.email, // Get email from the request
+            email: requestSignup.email.trim(), // Get email from the request
             password: password, // Send password to Firebase Authentication
           );
 
@@ -33,12 +38,18 @@ class SignupUsecase {
       try {
         // Save the user's data in the Firestore users collection
         // Use the Firebase UID as the document ID
+        //pick image and send to firstor
+
+        final imageUrl = await _uploadImage(image: image);
+
         await FirebaseFirestore.instance
             .collection(FirestoreCollections.users)
             .doc(user.uid)
             .set({
               // Convert the request data to a Map and add the user's UID
-              ...requestSignup.copyWith(uid: user.uid).toJson(),
+              ...requestSignup
+                  .copyWith(uid: user.uid, profileImage: imageUrl)
+                  .toJson(),
 
               // Add the account creation timestamp from the Firestore server
               'createdAt': FieldValue.serverTimestamp(),
@@ -75,5 +86,16 @@ class SignupUsecase {
     } catch (_) {
       return const Left('An unexpected error occurred. Please try again.');
     }
+  }
+}
+
+// image from image pick and image servis function uplding image
+
+Future<String?> _uploadImage({required File? image}) async {
+  if (image != null) {
+    final imageUrl = await UploadImageService.uplaodImage(imageFile: image);
+    return imageUrl;
+  } else {
+    return null;
   }
 }

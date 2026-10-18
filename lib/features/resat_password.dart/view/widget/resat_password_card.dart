@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shoply_app/core/regex/app_regex.dart';
 import 'package:shoply_app/core/routes/app_pages.dart';
 import 'package:shoply_app/core/routes/app_routes.dart';
 import 'package:shoply_app/core/utils/widgets/custom_button.dart';
@@ -8,9 +9,14 @@ import 'package:shoply_app/core/utils/widgets/custom_text_field.dart';
 import 'package:shoply_app/l10n/app_localizations.dart';
 
 class ResetPasswordCard extends StatelessWidget {
-  const ResetPasswordCard({super.key, required this.emailControler});
+  const ResetPasswordCard({
+    super.key,
+    required this.emailControler,
+    required this.onRest,
+  });
 
   final TextEditingController emailControler;
+  final VoidCallback onRest;
 
   @override
   Widget build(BuildContext context) {
@@ -69,18 +75,13 @@ class ResetPasswordCard extends StatelessWidget {
                 // Email
                 // =========================
                 CustomTextField(
+                  inputType: TextInputType.emailAddress,
+
                   label: localizations.emile,
                   controller: emailControler,
-                  valedator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return AppLocalizations.of(context)!.required_field;
-                    }
-                    if (!RegExp(r'^.+\@.+\..+$').hasMatch(value)) {
-                      return AppLocalizations.of(context)!.invalid_email;
-                    }
-                    return null;
-                  },
-                  inputType: TextInputType.emailAddress,
+                  valedator: (v) => AppRegex.email.hasMatch(v?.trim() ?? '')
+                      ? null
+                      : 'Enter a valid email',
                 ),
 
                 const SizedBox(height: 25),
@@ -93,7 +94,7 @@ class ResetPasswordCard extends StatelessWidget {
                   child: CustomButton(
                     text: localizations.reset_password,
                     onPressed: () {
-                      // Handle reset password logic here
+                      onRest();
                     },
                   ),
                 ),

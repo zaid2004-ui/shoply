@@ -1,95 +1,82 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shoply_app/core/routes/app_pages.dart';
+import 'package:shoply_app/core/routes/app_routes.dart';
+import 'package:shoply_app/core/utils/widgets/custom_loading.dart';
+import 'package:shoply_app/core/utils/widgets/snack_bar_helper.dart';
 import 'package:shoply_app/features/login/view/widget/login_card.dart';
+import 'package:shoply_app/features/login/view_model/cubit.dart';
+import 'package:shoply_app/features/login/view_model/state.dart';
 
-class Login extends StatefulWidget {
+class Login extends StatelessWidget {
   const Login({super.key});
-
-  @override
-  State<Login> createState() => _LoginState();
-}
-
-class _LoginState extends State<Login> {
-  // login process
-  /*  Future<void> _login(BuildContext context) async {
-    if (!globalKey.currentState!.validate()) {
-      return;
-    }
-
-    try {
-      await AuthServices().login(
-        email: emailControler.text.trim(),
-        password: passwordController.text.trim(),
-      );
-
-      if (!context.mounted) return;
-
-      GeneralWidget().showSucessMessage(
-        context,
-        AppLocalizations.of(context)!.loginSuccess,
-      );
-      Duration(microseconds: 1);
-      AppRouter.startNewRoute(Routes.home, args: {});
-    } catch (e) {
-      if (!context.mounted) return;
-
-      GeneralWidget().showErrorMessage(context, '$e');
-    }
-  }*/
-
-  final TextEditingController emailControler = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
-  final GlobalKey<FormState> globalKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
 
-    return Form(
-      key: globalKey,
-      child: Scaffold(
-        backgroundColor: colorScheme.primary,
-        // يمنع Scaffold من تغيير حجم الـ body بسبب الكيبورد
-        resizeToAvoidBottomInset: false,
-        //login card widget
-        body: Stack(
-          children: [
-            Positioned(
-              top: 500,
-              left: -150,
-              child: Container(
-                width: 300,
-                height: 300,
-                decoration: BoxDecoration(
-                  color: colorScheme.onPrimary.withAlpha(30),
-                  shape: BoxShape.circle,
+    return BlocProvider(
+      create: (_) => LoginCubit(),
+      child: Builder(
+        builder: (context) {
+          final cubit = context.read<LoginCubit>();
+
+          return BlocListener<LoginCubit, LoginState>(
+            listener: (context, state) {
+              if (state is LodingStateLogin) {
+                CustomLoading.show(context);
+              } else if (state is ErorrSstateLogin) {
+                CustomLoading.hide(context);
+                SnackBarHelper.showError(context, state.errorMessage);
+              } else if (state is SucssStateLogin) {
+                CustomLoading.hide(context);
+                AppRoutes.startNewRoute(AppPages.home);
+              }
+            },
+            child: Form(
+              key: cubit.key,
+              child: Scaffold(
+                backgroundColor: colorScheme.primary,
+                resizeToAvoidBottomInset: false,
+                body: Stack(
+                  children: [
+                    Positioned(
+                      top: 500,
+                      left: -150,
+                      child: Container(
+                        width: 300,
+                        height: 300,
+                        decoration: BoxDecoration(
+                          color: colorScheme.onPrimary.withAlpha(30),
+                          shape: BoxShape.circle,
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      top: 50,
+                      right: -150,
+                      child: Container(
+                        width: 300,
+                        height: 300,
+                        decoration: BoxDecoration(
+                          color: colorScheme.onPrimary.withAlpha(30),
+                          shape: BoxShape.circle,
+                        ),
+                      ),
+                    ),
+                    Center(
+                      child: LoginCard(
+                        passwordController: cubit.password,
+                        emailControler: cubit.emile,
+                        onLogin: cubit.login,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
-
-            // =========================
-            // Background circle - top right
-            // =========================
-            Positioned(
-              top: 50,
-              right: -150,
-              child: Container(
-                width: 300,
-                height: 300,
-                decoration: BoxDecoration(
-                  color: colorScheme.onPrimary.withAlpha(30),
-                  shape: BoxShape.circle,
-                ),
-              ),
-            ),
-
-            Center(
-              child: LoginCard(
-                passwordController: passwordController,
-                emailControler: emailControler,
-              ),
-            ),
-          ],
-        ),
+          );
+        },
       ),
     );
   }

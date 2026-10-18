@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shoply_app/core/regex/app_regex.dart';
-import 'package:shoply_app/core/utils/widgets/custom_button.dart';
 import 'package:shoply_app/core/utils/widgets/custom_password_field.dart';
 import 'package:shoply_app/core/utils/widgets/custom_row_title_subtitle.dart';
 import 'package:shoply_app/core/utils/widgets/custom_text_field.dart';
 import 'package:shoply_app/core/utils/widgets/cutom_text_filed_phon.dart';
+import 'package:shoply_app/features/signup/view/widget/action_buton.dart';
+import 'package:shoply_app/features/signup/view/widget/signup_image__picker.dart';
 import 'package:shoply_app/l10n/app_localizations.dart';
 
 class RegisterCard extends StatelessWidget {
@@ -59,6 +60,8 @@ class RegisterCard extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
+                SignUpImagePicker(),
+
                 Text(
                   localizations.registration,
                   textAlign: TextAlign.center,
@@ -108,11 +111,8 @@ class RegisterCard extends StatelessWidget {
 
                 const SizedBox(height: 15),
 
-                // Phone field
-                // ضع هنا CustomPhoneField الخاص بك
-                // مع phoneController
                 const SizedBox(height: 15),
-
+                //phone filed
                 CustomPasswordField(
                   label: localizations.password,
                   controller: passwordController,
@@ -122,7 +122,7 @@ class RegisterCard extends StatelessWidget {
                 ),
 
                 const SizedBox(height: 15),
-
+                //password fild
                 CustomPasswordField(
                   label: localizations.confirmPassword,
                   controller: passwordController,
@@ -132,27 +132,11 @@ class RegisterCard extends StatelessWidget {
                 ),
 
                 const SizedBox(height: 25),
-
-                Row(
-                  children: [
-                    Expanded(
-                      child: CustomButton(
-                        text: localizations.registration,
-                        onPressed: onRegister,
-                      ),
-                    ),
-
-                    const SizedBox(width: 10),
-
-                    Expanded(
-                      child: CustomButton(
-                        text: 'Google',
-                        onPressed: onGoogleRegister,
-                      ),
-                    ),
-                  ],
+                //buton
+                ActionButon(
+                  onRegister: onRegister,
+                  onGoogleRegister: onGoogleRegister,
                 ),
-
                 const SizedBox(height: 18),
 
                 CustomRowTitleSubtitle(

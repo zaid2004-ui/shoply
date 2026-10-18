@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shoply_app/core/regex/app_regex.dart';
 import 'package:shoply_app/core/routes/app_pages.dart';
 import 'package:shoply_app/core/routes/app_routes.dart';
 import 'package:shoply_app/core/utils/images/app_images.dart';
@@ -14,7 +15,9 @@ class LoginCard extends StatelessWidget {
     super.key,
     required this.emailControler,
     required this.passwordController,
+    required this.onLogin,
   });
+  final VoidCallback onLogin;
 
   final TextEditingController emailControler;
   final TextEditingController passwordController;
@@ -69,19 +72,13 @@ class LoginCard extends StatelessWidget {
 
                 // Email
                 CustomTextField(
+                  inputType: TextInputType.emailAddress,
+
                   label: localizations.emile,
                   controller: emailControler,
-                  valedator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return AppLocalizations.of(context)!.required_field;
-                    }
-
-                    if (!RegExp(r'^.+\@.+\..+$').hasMatch(value)) {
-                      return AppLocalizations.of(context)!.invalid_email;
-                    }
-                    return null;
-                  },
-                  inputType: TextInputType.emailAddress,
+                  valedator: (v) => AppRegex.email.hasMatch(v?.trim() ?? '')
+                      ? null
+                      : 'Enter a valid email',
                 ),
 
                 const SizedBox(height: 18),
@@ -90,13 +87,8 @@ class LoginCard extends StatelessWidget {
                 CustomPasswordField(
                   label: localizations.password,
                   controller: passwordController,
-                  valedat: (value) {
-                    if (value == null || value.isEmpty) {
-                      AppLocalizations.of(context)!.required_field;
-                    }
-
-                    return null;
-                  },
+                  valedat: (v) =>
+                      (v == null || v.isEmpty) ? 'Password is required' : null,
                 ),
 
                 const SizedBox(height: 10),
@@ -118,7 +110,7 @@ class LoginCard extends StatelessWidget {
                   child: CustomButton(
                     text: localizations.login,
                     onPressed: () {
-                      AppRoutes.pushNamed(AppPages.home);
+                      onLogin();
                     },
                   ),
                 ),

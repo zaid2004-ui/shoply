@@ -13,3 +13,7 @@ class SignupSuccessState extends SignupState {
   final String successMessage;
   SignupSuccessState({required this.successMessage});
 }
+
+class SingupRemoveImageState extends SignupState {}
+
+class SingupPickImageState extends SignupState {}
