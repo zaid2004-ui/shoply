@@ -5,5 +5,8 @@ class AppPages {
   static const String resetPassword = 'ResetPassword';
   static const String register = 'Register';
   static const String home = 'Home';
-  static const String detals = 'DetalsProduct';
+  static const String category = 'Category';
+  static const String product = 'Product';
+  static const String mainScreen = 'MainScreen';
+  static const String productDetileScreen = 'ProductDetileScreen';
 }

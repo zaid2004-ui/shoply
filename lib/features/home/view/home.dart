@@ -1,72 +1,84 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shoply_app/JSON/product_json.dart';
 import 'package:shoply_app/core/routes/app_pages.dart';
 import 'package:shoply_app/core/routes/app_routes.dart';
-import 'package:shoply_app/features/home/cubit/cubie.dart';
-import 'package:shoply_app/features/home/cubit/state_cubit.dart';
-import 'package:shoply_app/features/home/widget/card_home.dart';
-import 'package:shoply_app/model/model_product.dart';
 
-class Home extends StatefulWidget {
+import 'package:shoply_app/core/utils/widgets/custom_refresh_indecator.dart';
+import 'package:shoply_app/core/utils/widgets/custom_text_buton.dart';
+import 'package:shoply_app/features/home/view_model/cupit.dart';
+import 'package:shoply_app/features/home/view_model/sate.dart';
+import 'package:shoply_app/features/home/view/widget/home_categories.dart';
+import 'package:shoply_app/features/home/view/widget/home_sales.dart';
+import 'package:shoply_app/features/home/view/widget/home_trending_products.dart';
+
+class Home extends StatelessWidget {
   const Home({super.key});
 
   @override
-  State<Home> createState() => _HomeState();
-}
-
-class _HomeState extends State<Home> {
-  @override
   Widget build(BuildContext context) {
-    final ModelProduct model = ModelProduct.fromJson(data);
     return BlocProvider(
-      create: (BuildContext context) => GridCubit(),
-      child: BlocBuilder<GridCubit, GridState>(
-        builder: (context, state) {
-          return Scaffold(
-            appBar: AppBar(
-              title: const Text('Home'),
-              actions: [
-                IconButton(
-                  icon: Icon(
-                    state.count == 1 ? Icons.grid_view : Icons.view_list,
-                  ),
-                  onPressed: () {
-                    context.read<GridCubit>().changeGrid();
-                    // Handle cart button press
-                  },
-                ),
-              ],
-            ),
-            body: GridView.builder(
-              padding: const EdgeInsets.all(8.0),
-              itemCount: model.products.length,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: state.count,
-                childAspectRatio: state.count == 1 ? 3.5 : 0.75,
-              ),
-              itemBuilder: (context, index) {
-                // Create a CardHome widget for each product
-                return InkWell(
-                  onTap: () {
-                    AppRoutes.pushNamed(
-                      AppPages.detals,
-                      args: {'model': model, 'index': index},
-                    );
-                  },
-                  child: CardHome(
-                    index: index,
-                    model: model,
-                    image: model.products[index].image,
-                    name: model.products[index].name,
-                    isSingle: state.count,
-                    price: model.products[index].price,
-                  ),
-                );
+      create: (context) => HomeCubit()..getHome(),
+      child: Scaffold(
+        body: BlocBuilder<HomeCubit, HomeState>(
+          builder: (context, state) {
+            final cubit = context.read<HomeCubit>();
+            if (state is HomeLodingState) {
+              return Center(child: CircularProgressIndicator());
+            } else if (state is HomeErorreState) {
+              return Center(child: Text(state.errorState));
+            }
+            return CustomRefreshIndicator(
+              onRefresh: () async {
+                await cubit.refreshHome();
               },
-            ),
-          );
-        },
+
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    HomeSales(),
+
+                    //categry and view all
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: Row(
+                        children: [
+                          CustomTextButton(text: 'category', onPressed: () {}),
+                          Spacer(),
+                          CustomTextButton(
+                            text: 'viewAll',
+                            onPressed: () {
+                              AppRoutes.pushNamed(AppPages.category);
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    HomeCategories(),
+
+                    //trending products and view all
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      child: Row(
+                        children: [
+                          CustomTextButton(
+                            text: 'trending product',
+                            onPressed: () {},
+                          ),
+                          Spacer(),
+                          CustomTextButton(text: 'viewAll', onPressed: () {}),
+                        ],
+                      ),
+                    ),
+
+                    // trinding products
+                    HomeTrendingProducts(),
+                  ],
+                ),
+              ),
+            );
+          },
+        ),
       ),
     );
   }

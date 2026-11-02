@@ -51,4 +51,7 @@ class AppIcons {
   static const IconData profile = Icons.person;
   static const IconData volunteer = Icons.volunteer_activism;
   static const IconData reels = Icons.video_library;
+  static const IconData notification = Icons.notifications_none;
+  static const IconData add = Icons.add;
+  static const IconData remove = Icons.remove;
 }

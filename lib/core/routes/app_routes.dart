@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:shoply_app/core/routes/app_pages.dart';
-import 'package:shoply_app/features/home/view/detals_product.dart';
+import 'package:shoply_app/features/category/view/category.dart';
 import 'package:shoply_app/features/home/view/home.dart';
 import 'package:shoply_app/features/login/view/login.dart';
+import 'package:shoply_app/features/main/view/main.dart';
 import 'package:shoply_app/features/onboarding/view/on_boarding_screen.dart';
+import 'package:shoply_app/features/product_details/view/product_detile_screen.dart';
+import 'package:shoply_app/features/products/view/product.dart';
 import 'package:shoply_app/features/signup/view/signup_screen.dart';
 import 'package:shoply_app/features/resat_password.dart/view/resit_password_screen.dart';
 import 'package:shoply_app/features/splash/view/splash_screen.dart';
+import 'package:shoply_app/model/products/response_products.dart';
 
 class AppRoutes {
   static final GlobalKey<NavigatorState> navigatorKey =
@@ -51,15 +55,44 @@ class AppRoutes {
             return const Home();
           },
         );
-      case AppPages.detals:
-        final args = settings.arguments as Map<String, dynamic>;
-
+      case AppPages.category:
         return MaterialPageRoute(
           builder: (context) {
-            return DetalsProduct(model: args['model'], index: args['index']);
+            return const Category();
+          },
+        );
+      case AppPages.mainScreen:
+        return MaterialPageRoute(
+          builder: (context) {
+            return const MainScreen();
           },
         );
 
+      case AppPages.productDetileScreen:
+        return MaterialPageRoute(
+          builder: (_) {
+            final arguments = settings.arguments as Map<String, dynamic>;
+
+            // استخراج بيانات المنتج
+            final responseProducts =
+                arguments['responseProducts'] as ResponseProducts;
+
+            // استخراج context الصفحة السابقة
+            return ProductDetileScreen(responsProducts: responseProducts);
+          },
+        );
+
+      case AppPages.product:
+        return MaterialPageRoute(
+          builder: (_) {
+            final arrgument = settings.arguments as Map<String, dynamic>;
+
+            return Product(
+              categoryId: arrgument['categoryId'] as String,
+              nameCategory: arrgument['name'] as String,
+            );
+          },
+        );
       default:
         return null;
     }

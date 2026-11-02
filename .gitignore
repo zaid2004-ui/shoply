@@ -43,3 +43,5 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+firestore_seed/serviceAccountKey.json
+firestore_seed/node_modules/

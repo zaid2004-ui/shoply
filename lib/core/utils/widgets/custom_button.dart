@@ -3,21 +3,27 @@ import 'package:flutter/material.dart';
 class CustomButton extends StatelessWidget {
   final String text;
   final VoidCallback onPressed;
+  final Color? backgroundColor;
 
-  const CustomButton({super.key, required this.text, required this.onPressed});
+  const CustomButton({
+    super.key,
+    required this.text,
+    required this.onPressed,
+    this.backgroundColor,
+  });
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-        backgroundColor: Theme.of(
-          context,
-        ).colorScheme.primary.withValues(alpha: 0.8),
+        backgroundColor:
+            backgroundColor ??
+            Theme.of(context).colorScheme.primary.withValues(alpha: 0.8),
       ),
       child: Text(
         text,
-        style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
+        style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
       ),
     );
   }

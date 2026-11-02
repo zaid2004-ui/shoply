@@ -60,6 +60,7 @@ class RegisterCard extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
+                //sinnup image picker
                 SignUpImagePicker(),
 
                 Text(

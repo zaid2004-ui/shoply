@@ -48,7 +48,7 @@ class _SplashScreenState extends State<SplashScreen>
           } else if (state is SplashLoginPageState) {
             AppRoutes.startNewRoute(AppPages.login);
           } else if (state is SplashHomePageState) {
-            AppRoutes.startNewRoute(AppPages.home);
+            AppRoutes.startNewRoute(AppPages.mainScreen);
           }
         },
         child: Scaffold(

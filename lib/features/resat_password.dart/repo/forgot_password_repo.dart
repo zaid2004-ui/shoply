@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:shoply_app/use_case/forgot_password/forgot_password_usecase.dart';
+import 'package:shoply_app/core/use_case/forgot_password/forgot_password_usecase.dart';
 
 class ForgotPasswordRepo {
   final _usecase = ForgotPasswordUsecase();

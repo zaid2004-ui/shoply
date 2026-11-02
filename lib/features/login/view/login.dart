@@ -30,7 +30,7 @@ class Login extends StatelessWidget {
                 SnackBarHelper.showError(context, state.errorMessage);
               } else if (state is SucssStateLogin) {
                 CustomLoading.hide(context);
-                AppRoutes.startNewRoute(AppPages.home);
+                AppRoutes.startNewRoute(AppPages.mainScreen);
               }
             },
             child: Form(

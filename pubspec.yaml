@@ -50,6 +50,8 @@ dependencies:
   intl_phone_field: ^3.2.0
   image_picker: ^1.2.4
   supabase_flutter: ^2.18.3
+  cached_network_image: ^4.0.4
+  pro_dialog: ^1.0.9
 
 dev_dependencies:
   flutter_test:
